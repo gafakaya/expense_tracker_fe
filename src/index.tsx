@@ -1,5 +1,19 @@
 import ReactDOM from "react-dom";
-import App from "./App";
-import 'antd/dist/antd.css';
+import thunk from "redux-thunk";
+import { applyMiddleware, createStore } from "redux";
+import "antd/dist/antd.css";
+import { BrowserRouter as Router } from "react-router-dom";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import rootReducers from "./store";
+import App from "./App";
+import { Provider } from "react-redux";
+
+const store = createStore(rootReducers, applyMiddleware(thunk));
+ReactDOM.render(
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById("root")
+);
